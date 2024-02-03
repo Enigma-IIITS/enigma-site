@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project info</title>
+
+  <link href="assets/img/logo.png" rel="icon">
+  <style>
+
+
+    body{
+      background-image: url(./assets/img/hero-bg.jpg);
+      background-size: cover;
+      position: relative;
+    }
+
+/* HEADER */
+    #header {
+  transition: all 0.5s;
+  z-index: 997;
+  padding: 15px 0;
+}
+
+#header.header-scrolled,
+#header.header-inner-pages {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#header .logo {
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  height: 100px;
+}
+
+#header .logo a {
+  color: #fff;
+}
+
+#header .logo a span {
+  color: #fafaf9;
+}
+
+#header .logo img {
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+
+
+/* navigation  bar */
+
+
+.navbar {
+  padding: 0;
+  position: fixed;
+  top: 10px;
+  right: 30px;
+ 
+  
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+  color: #faf9f7;
+  text-decoration: none;
+}
+
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: 14px;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+  min-width: 200px;
+  list-style: none;
+}
+
+.navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  color: #151515;
+  font-weight: 400;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+  background-color: #fcf8f1;
+}
+
+.navbar .dropdown:hover>ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+  opacity: 1;
+  top: 0;
+  left: 10px;
+  visibility: visible;
+}
+
+.navbar button {
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 10px;
+  border-radius: 4px;
+  transition: 0.5s;
+  background-color: black;
+  margin-top: 10px;
+  /* border: 2px solid #fff; */
+  color: #fff;
+  
+}
+
+/* Button hover effect */
+.navbar button:hover {
+  background-color: #333; /* Change background color on hover */
+}
+
+
+@media (max-width: 1366px) {
+  .navbar .dropdown .dropdown ul {
+    left: -90%;
+  }
+
+  .navbar .dropdown .dropdown:hover>ul {
+    left: -100%;
+  }
+}
+
+/* END OF HEADER */
+
+/* MAIN */
+/* Add these styles to your existing CSS */
+
+/* MAIN */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  text-align: center;
+  
+}
+
+.portfolio-info {
+  text-align: center;
+  padding-top: 200px;
+}
+
+.portfolio-info h2 {
+  font-family: sans-serif;
+  font-size: 32px;
+  color: #fff; /* Adjust the color based on your design */
+  margin-bottom: 10px; /* Add margin to separate h2 and h3 */
+}
+
+.portfolio-info h3 {
+  font-family: sans-serif;
+  font-size: 24px;
+  color: #fff; /* Adjust the color based on your design */
+  margin-bottom: 20px; /* Add margin to separate h3 and ul */
+}
+
+.portfolio-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.portfolio-info ul li {
+  font-family: sans-serif;
+  font-size: 18px;
+  color: #fff; /* Adjust the color based on your design */
+  margin-bottom: 10px; /* Add margin between list items */
+}
+
+/* END OF MAIN */
+
+/* END OF MAIN */
+
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <!-- header -->
+ 
+    <header id="header" class="fixed-top ">
+      <div class="container d-flex align-items-center justify-content-lg-between">
+  
+        <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid" ></a>
+  
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li><button><a class="nav-link scrollto active" href="index.html">HOME</a></button></li>
+
+            
+          
+         
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+  
+     
+  
+      </div>
+  
+
+
+  </header>
+<!-- end of header -->
+
+<!-- main start -->
+  <main>
+
+   
+
+
+    <div class="col-lg-4">
+      <div class="portfolio-info">
+        <h2 style="text-align: center; font-family: Arial, Helvetica, sans-serif;"><b>SYSTEM SOFTWARE</b></h2>
+        <h3 style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;"><i>PROJECTS</i></h3>
+        <img src="./assets/img/portfolio/portfolio-3.jpg">
+        <ul>
+          <b>
+            <li>RISC-V Virtual Machine</li>
+            <li> rumi - MIDI Serializer and Deserializer</li> 
+            <li>CHIP-8 Emulator</li>
+            <li> Regex Engine</li>
+            <li>Parser Combinator</li>
+          </b>
+        </ul>
+      </div>
+    </div>
+
+
+  </main>
+
+  <!-- end of main -->
+
+
+
+
+  
+</body>
+
+
+</html>
