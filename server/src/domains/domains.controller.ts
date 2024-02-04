@@ -1,27 +1,38 @@
-import { Controller, Get, Query, Put, Param, Delete } from '@nestjs/common';
-
-export class ListAllEntities {
-  limit: number;
-}
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Param,
+  Delete,
+  Body,
+} from '@nestjs/common';
+import { ClubDomainsService } from './domains.service';
+import { CreateClubDomainDto } from './domains.dto';
 
 @Controller('domains')
 export class DomainsController {
-  @Get(':slug')
-  findOne(@Param('slug') slug: string) {
-    return 'find by slug' + slug;
-  }
+  constructor(private readonly service: ClubDomainsService) {}
 
+  @Get(':slug')
+  async findOne(@Param('slug') slug: string) {
+    return this.service.findOne(slug);
+  }
+  @Post()
+  async create(@Body() createDomainDto: CreateClubDomainDto) {
+    return await this.service.create(createDomainDto);
+  }
   @Get()
-  findAll(@Query() query: ListAllEntities) {
-    return 'list all entities limit by' + query;
+  async findAll() {
+    return await this.service.findAll();
   }
 
   @Put(':slug')
-  update(@Param('slug') slug: string) {
-    return 'update ' + slug;
+  async update(@Body() updateDomainDto: CreateClubDomainDto) {
+    return await this.service.update(updateDomainDto);
   }
   @Delete(':slug')
-  remove(@Param('slug') slug: string) {
-    return 'delete ' + slug;
+  async remove(@Param('slug') slug: string) {
+    return await this.service.remove(slug);
   }
 }

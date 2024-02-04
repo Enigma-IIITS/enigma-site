@@ -6,8 +6,8 @@ export type ClubDomainDocument = HydratedDocument<ClubDomain>;
 @Schema()
 export class ClubDomain {
   @Prop({ required: true })
-  name: string;
-  @Prop({ required: true })
+  domainName: string;
+  @Prop({ required: true, index: true })
   slug: string;
   @Prop()
   description: string;
