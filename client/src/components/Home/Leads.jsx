@@ -101,7 +101,7 @@ export default function Leads() {
                 >
                     {people.map((person) => (
                         <li key={person.name}>
-                            <div className="flex items-center gap-x-6 m-auto w-fit">
+                            <div className={`flex items-center gap-x-6 m-auto w-fit ${(person.role === "Lead" || person.role === "Co-Lead") ? " rounded pb-4 pr-2 border-e-2 border-b-2" : " "}`}>
                                 <Image
                                     className="h-16 w-16 rounded-full"
                                     width={64}
@@ -137,6 +137,6 @@ export default function Leads() {
                     ))}
                 </ul>
             </div>
-        </div>
+        </div >
     )
 }
