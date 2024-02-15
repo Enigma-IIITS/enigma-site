@@ -1,19 +1,31 @@
 .cyberBackground {
     background-image: url('https://github.com/Enigma-IIITS/enigma-site/assets/116871732/2f95ca86-67f2-47a1-be4f-989668fd4d0d');
     background-position: bottom;
+    transition-property: top, height;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
 
 .cgBackground {
     background-image: url('https://github.com/Enigma-IIITS/enigma-site/assets/116871732/15abd104-7f4b-4cc4-a77c-5be1233c60ef');
     background-position: bottom;
+    transition-property: top, height;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
 
 .ssBackground {
     background-image: url('https://github.com/Enigma-IIITS/enigma-site/assets/116871732/ef862877-b7f7-4d5c-851c-4533df5a30ae');
     background-position: bottom;
+    transition-property: top, height;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }
 
 .dsBackground {
     background-image: url('https://github.com/Enigma-IIITS/enigma-site/assets/116871732/a12fd27e-f0cd-40e7-b38e-5fbcf49c550b');
     background-position: bottom;
+    transition-property: top, height;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
 }

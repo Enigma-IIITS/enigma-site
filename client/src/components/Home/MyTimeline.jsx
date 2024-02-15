@@ -5,8 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const MyTimeline = () => {
-    // State variables to hold events from different arrays
-    const [recentlyCompletedEvents, setRecentlyCompletedEvents] = useState([
+    const [recentEvents, setRecentEvents] = useState([
         {
             title: 'Recent Event 1',
             date: 'February 14, 2024',
@@ -23,40 +22,6 @@ const MyTimeline = () => {
             description: 'This is the description of event 3.',
         },
     ])
-    const [upcomingEvents, setUpcomingEvents] = useState([
-        {
-            title: 'Upcomming Event 1',
-            date: 'February 14, 2024',
-            description: 'This is the description of event 1.',
-        },
-        {
-            title: 'Upcomming Event 2',
-            date: 'February 15, 2024',
-            description: 'This is the description of event 2.',
-        },
-        {
-            title: 'Upcomming Event 3',
-            date: 'February 16, 2024',
-            description: 'This is the description of event 3.',
-        },
-    ])
-    const [ongoingEvents, setOngoingEvents] = useState([
-        {
-            title: 'Ongoing Event 1',
-            date: 'February 14, 2024',
-            description: 'This is the description of event 1.',
-        },
-        {
-            title: 'Ongoing Event 2',
-            date: 'February 15, 2024',
-            description: 'This is the description of event 2.',
-        },
-        {
-            title: 'Ongoing Event 3',
-            date: 'February 16, 2024',
-            description: 'This is the description of event 3.',
-        },
-    ])
 
     // Function to fetch events from APIs
     const fetchEvents = async () => {
@@ -65,17 +30,8 @@ const MyTimeline = () => {
             'recently-completed-events-api'
         )
         const recentlyCompletedData = await recentlyCompletedResponse.json()
-        setRecentlyCompletedEvents(recentlyCompletedData)
+        setRecentEvents(recentlyCompletedData)
 
-        // Fetch upcoming events
-        const upcomingResponse = await fetch('upcoming-events-api')
-        const upcomingData = await upcomingResponse.json()
-        setUpcomingEvents(upcomingData)
-
-        // Fetch ongoing events
-        const ongoingResponse = await fetch('ongoing-events-api')
-        const ongoingData = await ongoingResponse.json()
-        setOngoingEvents(ongoingData)
     }
 
     useEffect(() => {
@@ -104,21 +60,6 @@ const MyTimeline = () => {
         return () => context.revert()
     }, [])
 
-    // State variable to hold the currently selected category
-    const [selectedCategory, setSelectedCategory] =
-        useState('recentlyCompleted')
-    const getCategoryTitle = () => {
-        switch (selectedCategory) {
-            case 'recentlyCompleted':
-                return 'Recently Completed Events'
-            case 'upcoming':
-                return 'Upcoming Events'
-            case 'ongoing':
-                return 'Ongoing Events'
-            default:
-                return 'Events'
-        }
-    }
 
     return (
         <section
@@ -131,76 +72,20 @@ const MyTimeline = () => {
                         ref={text}
                         className=" md:relative top-[75px] col-span-12 md:col-span-3"
                     >
-                        <div className=" text-center md:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto md:before:mx-0 before:bg-violet-400">
-                            <h3 className="text-3xl font-semibold">
-                                {getCategoryTitle()}
+                        <div className=" text-center md:pt-20 md:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto md:before:mx-0 before:bg-violet-400">
+                            <h3 className="text-3xl font-semibold md:pr-5">
+                                Recent events
                             </h3>
-                        </div>
-                        <div className="flex md:flex-col md:space-y-2 items-center md:items-start w-full md:w-auto justify-center md:h-32">
-                            <button
-                                className=" py-2 rounded md:w-fit mt-0 mx-1 h-20 px-2 bg-gray-800"
-                                onClick={() =>
-                                    setSelectedCategory('recentlyCompleted')
-                                }
-                            >
-                                Recently Completed
-                            </button>
-                            <button
-                                className=" py-2 rounded md:w-fit mt-0 mx-1 h-20 px-2 bg-gray-800"
-                                onClick={() => setSelectedCategory('upcoming')}
-                            >
-                                Upcoming
-                            </button>
-                            <button
-                                className=" py-2 rounded md:w-fit mt-0 mx-1 h-20 px-2 bg-gray-800"
-                                onClick={() => setSelectedCategory('ongoing')}
-                            >
-                                Ongoing
-                            </button>
                         </div>
                     </div>
                     <div className="relative col-span-12 px-4 space-y-6 md:col-span-9">
                         <div className="col-span-12 space-y-12 relative px-4  before:absolute before:top-2 before:bottom-0 before:w-0.5 before:-left-3 before:bg-gray-700">
-                            {/* Display events based on the selected category */}
-                            {selectedCategory === 'recentlyCompleted' &&
-                                recentlyCompletedEvents.map((event, index) => (
+
+                            {
+                                recentEvents.map((event, index) => (
                                     <div
                                         key={index}
                                         className="flex flex-col relative before:absolute before:top-2 before:w-4 before:h-4 before:rounded-full before:left-[-35px] before:z-[1] before:bg-violet-400"
-                                    >
-                                        <h3 className="text-xl font-semibold tracki">
-                                            {event.title}
-                                        </h3>
-                                        <time className="text-xs tracki uppercase text-gray-400">
-                                            {event.date}
-                                        </time>
-                                        <p className="mt-3">
-                                            {event.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            {selectedCategory === 'upcoming' &&
-                                upcomingEvents.map((event, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-col md:relative md:before:absolute md:before:top-2 md:before:w-4 md:before:h-4 md:before:rounded-full md:before:left-[-35px] md:before:z-[1] before:bg-violet-400"
-                                    >
-                                        <h3 className="text-xl font-semibold tracki">
-                                            {event.title}
-                                        </h3>
-                                        <time className="text-xs tracki uppercase text-gray-400">
-                                            {event.date}
-                                        </time>
-                                        <p className="mt-3">
-                                            {event.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            {selectedCategory === 'ongoing' &&
-                                ongoingEvents.map((event, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-col md:relative md:before:absolute md:before:top-2 md:before:w-4 md:before:h-4 md:before:rounded-full md:before:left-[-35px] md:before:z-[1] before:bg-violet-400"
                                     >
                                         <h3 className="text-xl font-semibold tracki">
                                             {event.title}
