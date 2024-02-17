@@ -80,7 +80,7 @@ export default function Home() {
                 <Separator className="  my-5 bg-white/60 " />
                 <div className="flex justify-around items-center flex-wrap-reverse mx-10  my-5">
                     <p className=" md:text-left my-5 md:w-2/4">
-                        "ENIGMA" stands as the preeminent technical club at the
+                        {`"ENIGMA" stands as the preeminent technical club at the
                         esteemed Indian Institute of Information Technology
                         (IIIT), committed to advancing technology through
                         tangible, hands-on projects. Within ENIGMA, we believe
@@ -96,7 +96,7 @@ export default function Home() {
                         representation, cybersecurity, and overcoming challenges
                         in distributed systems. Additionally, we dedicate
                         ourselves to the meticulous refinement of system
-                        software.
+                        software.`}
                     </p>
 
                     <Image
