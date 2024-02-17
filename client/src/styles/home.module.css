@@ -1,0 +1,20 @@
+.welcome::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-image: url('https://github.com/Enigma-IIITS/enigma-site/assets/116871732/5450cee5-a0fe-4c13-a04a-da16ce024a71');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    opacity: 0.8;
+}
+
+.welcome {
+    width: 100vw;
+    height: 100vh;
+}
