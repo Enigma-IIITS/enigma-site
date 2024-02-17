@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Leads from '@/components/Home/Leads'
 import MyTimeline from '@/components/Home/MyTimeline'
 import Domains from '@/components/Home/Domains'
+import Mentor from '@/components/Home/Mentor'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
                 },
             })
 
-            tl.to(ref2.current, { y: 250 }, 0)
+            tl.to(ref2.current, { y: 400 }, 0)
 
             const tl2 = gsap.timeline({
                 scrollTrigger: {
@@ -52,7 +53,7 @@ export default function Home() {
             <div className={styles.welcome}>
                 <div
                     ref={ref1}
-                    className="  bg-grey/5 w-screen h-screen flex justify-center items-center"
+                    className="  bg-black/30 w-screen h-screen flex justify-center items-center"
                 >
                     <div className="mx-auto max-w-2xl ">
                         <div
@@ -70,7 +71,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div
+            <section id='about'
                 ref={ref3}
                 className=" w-full min-h-[400px] text-center flex flex-col justify-around my-10 bg-zinc-950 "
             >
@@ -108,10 +109,10 @@ export default function Home() {
                         ref={ref4}
                     />
                 </div>
-            </div>
+            </section>
             <MyTimeline />
             <Domains />
-
+            <Mentor />
             <Leads />
         </main>
     )
