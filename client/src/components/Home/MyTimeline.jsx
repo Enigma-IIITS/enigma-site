@@ -31,7 +31,6 @@ const MyTimeline = () => {
         )
         const recentlyCompletedData = await recentlyCompletedResponse.json()
         setRecentEvents(recentlyCompletedData)
-
     }
 
     useEffect(() => {
@@ -60,7 +59,6 @@ const MyTimeline = () => {
         return () => context.revert()
     }, [])
 
-
     return (
         <section
             ref={container}
@@ -80,24 +78,20 @@ const MyTimeline = () => {
                     </div>
                     <div className="relative col-span-12 px-4 space-y-6 md:col-span-9">
                         <div className="col-span-12 space-y-12 relative px-4  before:absolute before:top-2 before:bottom-0 before:w-0.5 before:-left-3 before:bg-gray-700">
-
-                            {
-                                recentEvents.map((event, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-col relative before:absolute before:top-2 before:w-4 before:h-4 before:rounded-full before:left-[-35px] before:z-[1] before:bg-violet-400"
-                                    >
-                                        <h3 className="text-xl font-semibold tracki">
-                                            {event.title}
-                                        </h3>
-                                        <time className="text-xs tracki uppercase text-gray-400">
-                                            {event.date}
-                                        </time>
-                                        <p className="mt-3">
-                                            {event.description}
-                                        </p>
-                                    </div>
-                                ))}
+                            {recentEvents.map((event, index) => (
+                                <div
+                                    key={index}
+                                    className="flex flex-col relative before:absolute before:top-2 before:w-4 before:h-4 before:rounded-full before:left-[-35px] before:z-[1] before:bg-violet-400"
+                                >
+                                    <h3 className="text-xl font-semibold tracki">
+                                        {event.title}
+                                    </h3>
+                                    <time className="text-xs tracki uppercase text-gray-400">
+                                        {event.date}
+                                    </time>
+                                    <p className="mt-3">{event.description}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
