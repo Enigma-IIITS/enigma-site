@@ -9,11 +9,16 @@ const CommingSoon = () => {
                 </h2>
 
                 <p className="max-w-4xl mt-6 text-center text-gray-500 dark:text-gray-300">
-                    This website is still in it's development phase, the feature you are requesting is not yet available. We request you to wait patiently
+                    This website is still in it's development phase, the feature
+                    you are requesting is not yet available. We request you to
+                    wait patiently
                 </p>
 
                 <div className="inline-flex w-full mt-6 sm:w-auto">
-                    <a href="/" className="inline-flex items-center justify-center w-full px-6 py-2 text-white duration-300 bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                    <a
+                        href="/"
+                        className="inline-flex items-center justify-center w-full px-6 py-2 text-white duration-300 bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                    >
                         Return to Home
                     </a>
                 </div>

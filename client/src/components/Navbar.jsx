@@ -53,7 +53,9 @@ const Navbar = () => {
                     <div
                         className={`flex items-center justify-between ${isOpen ? 'flex-col' : 'md:flex md:items-center md:gap-12'}`}
                     >
-                        <div className={`flex-1 md:flex md:items-center md:gap-12 ${isOpen ? "absolute top-9 left-7 " : ""} `}>
+                        <div
+                            className={`flex-1 md:flex md:items-center md:gap-12 ${isOpen ? 'absolute top-9 left-7 ' : ''} `}
+                        >
                             <a className="block text-white " href="/">
                                 <Image
                                     src="https://github.com/Enigma-IIITS/enigma-site/assets/116871732/c72bc255-b90b-45f6-b980-b7b451d6465c"
@@ -132,7 +134,7 @@ const Navbar = () => {
                     </div>
                 </nav>
             </header>
-            {(pathname !== '/') && (<div className=' h-[70px]'></div>)}
+            {pathname !== '/' && <div className=" h-[70px]"></div>}
         </>
     )
 }

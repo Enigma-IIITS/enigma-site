@@ -71,7 +71,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <section id='about'
+            <section
+                id="about"
                 ref={ref3}
                 className=" w-full min-h-[400px] text-center flex flex-col justify-around my-10 bg-zinc-950 "
             >
