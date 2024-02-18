@@ -1,5 +1,4 @@
-export class FindAllDto<FindFilter> {
+export class FindAllDto {
   page: number;
   searchFor: string;
-  applyFilters: FindFilter;
 }

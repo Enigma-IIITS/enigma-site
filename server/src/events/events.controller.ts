@@ -12,7 +12,7 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { EventResponseDto } from './dto/event-response.dto';
-import FindAllEventsDto from './dto/find-all.dto';
+import FindAllEventsDto from './dto/find-all-events.dto';
 
 @ApiTags('events')
 @Controller('events')
@@ -24,7 +24,7 @@ export class EventsController {
     return await this.eventsService.create(createEventDto);
   }
 
-  @Get('')
+  @Get()
   async findAll(@Body() params: FindAllEventsDto): Promise<EventResponseDto[]> {
     return await this.eventsService.findAll(params);
   }
