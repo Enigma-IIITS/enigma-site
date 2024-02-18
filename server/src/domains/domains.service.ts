@@ -2,7 +2,7 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClubDomain, ClubDomainDocument } from './domains.schema';
-import { CreateClubDomainDto } from './domains.dto';
+import { CreateClubDomainDto } from './dto/create-domain.dto';
 
 @Injectable()
 export class ClubDomainsService {
@@ -13,7 +13,7 @@ export class ClubDomainsService {
 
   async create(createClubDomainDto: CreateClubDomainDto): Promise<ClubDomain> {
     const createdClubDomain = new this.model(createClubDomainDto);
-    return createdClubDomain.save();
+    return await createdClubDomain.save();
   }
 
   async findAll(): Promise<ClubDomain[]> {
@@ -24,13 +24,16 @@ export class ClubDomainsService {
     return await this.model.findOne({ slug: slug });
   }
 
-  async update(updateDomainDto: CreateClubDomainDto): Promise<ClubDomain> {
+  async update(
+    id: string,
+    updateDomainDto: CreateClubDomainDto,
+  ): Promise<ClubDomain> {
     return await this.model
-      .findOneAndUpdate({ slug: updateDomainDto.slug }, updateDomainDto)
+      .findByIdAndUpdate(id, updateDomainDto, { upsert: true })
       .exec();
   }
 
-  async remove(slug: string): Promise<ClubDomain> {
-    return await this.model.findOneAndDelete({ slug: slug });
+  async remove(id: string): Promise<ClubDomain> {
+    return await this.model.findByIdAndDelete(id);
   }
 }

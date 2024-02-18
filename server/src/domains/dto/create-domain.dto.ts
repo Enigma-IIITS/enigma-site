@@ -1,5 +1,5 @@
 export class CreateClubDomainDto {
-  name: string;
+  domainName: string;
   slug: string;
   description?: string;
   coverImageLink?: string;

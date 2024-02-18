@@ -2,37 +2,50 @@ import {
   Controller,
   Get,
   Post,
-  Put,
   Param,
   Delete,
   Body,
+  Patch,
 } from '@nestjs/common';
 import { ClubDomainsService } from './domains.service';
-import { CreateClubDomainDto } from './domains.dto';
+import { CreateClubDomainDto } from './dto/create-domain.dto';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ClubDomainResponse } from './dto/domain-response.dto';
 
+@ApiTags('domains')
 @Controller('domains')
 export class DomainsController {
   constructor(private readonly service: ClubDomainsService) {}
 
   @Get(':slug')
-  async findOne(@Param('slug') slug: string) {
+  @ApiOperation({ summary: 'Get details of a particular domain' })
+  async findOne(@Param('slug') slug: string): Promise<ClubDomainResponse> {
     return this.service.findOne(slug);
   }
   @Post()
-  async create(@Body() createDomainDto: CreateClubDomainDto) {
+  @ApiOperation({ summary: 'Create a new domain' })
+  async create(
+    @Body() createDomainDto: CreateClubDomainDto,
+  ): Promise<ClubDomainResponse> {
     return await this.service.create(createDomainDto);
   }
   @Get()
-  async findAll() {
+  @ApiOperation({ summary: 'Get details of all domains' })
+  async findAll(): Promise<ClubDomainResponse[]> {
     return await this.service.findAll();
   }
 
-  @Put(':slug')
-  async update(@Body() updateDomainDto: CreateClubDomainDto) {
-    return await this.service.update(updateDomainDto);
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update details of an existing domain' })
+  async update(
+    @Param('id') id: string,
+    @Body() updateDomainDto: CreateClubDomainDto,
+  ): Promise<ClubDomainResponse> {
+    return await this.service.update(id, updateDomainDto);
   }
-  @Delete(':slug')
-  async remove(@Param('slug') slug: string) {
-    return await this.service.remove(slug);
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete a particular domain by its id' })
+  async remove(@Param('id') id: string): Promise<ClubDomainResponse> {
+    return await this.service.remove(id);
   }
 }
