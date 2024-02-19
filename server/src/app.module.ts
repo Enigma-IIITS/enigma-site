@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { EventsModule } from './events/events.module';
 import { TeamsModule } from './teams/teams.module';
+import { AuthModule } from './auth/auth.module';
 
 configDotenv();
 
@@ -18,6 +19,6 @@ if (!process.env.MONGO_CON_STR) {
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [DomainsModule, MongooseModule.forRoot(process.env.MONGO_CON_STR), UsersModule, BlogsModule, EventsModule, TeamsModule],
+  imports: [DomainsModule, MongooseModule.forRoot(process.env.MONGO_CON_STR), UsersModule, BlogsModule, EventsModule, TeamsModule, AuthModule],
 })
 export class AppModule {}

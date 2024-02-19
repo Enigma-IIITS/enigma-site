@@ -27,9 +27,9 @@ export class UsersController {
     return this.service.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.service.findOne(+id);
+  @Get(':username')
+  findOne(@Param('username') username: string) {
+    return this.service.findOneByUsername(username);
   }
 
   @Patch(':id')
@@ -39,6 +39,6 @@ export class UsersController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.service.remove(+id);
+    return this.service.remove(id);
   }
 }
