@@ -89,7 +89,7 @@ const Page = () => {
                 {event.sponsors.length > 0 && (
                     <div className="flex flex-col gap-4 mt-4 items-center">
                         <p className="text-gray-200">Sponsors</p>
-                        <div className="flex flex-wrap gap-4 mt-4 items-center">
+                        <div className="flex flex-wrap gap-4 mt-4 items-center justify-around">
                             {event.sponsors.map((sponsor) => (
                                 <a
                                     key={sponsor.name}

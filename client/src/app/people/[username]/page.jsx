@@ -51,7 +51,7 @@ export default function Page({ params }) {
             <div className="flex flex-col gap-4 items-center">
                 <Image className=" rounded" width={200} height={200} src={person.photo} alt={person.name} />
                 <h1 className="text-3xl font-bold">{person.name}</h1>
-                <p className="text-gray-400 max-w-[90%]">{person.bio}</p>
+                <p className="text-gray-400 max-w-[90%] text-center">{person.bio}</p>
 
                 <div className="flex flex-wrap gap-4 mt-4">
                     {person.github && (
