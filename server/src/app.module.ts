@@ -9,6 +9,8 @@ import { BlogsModule } from './blogs/blogs.module';
 import { EventsModule } from './events/events.module';
 import { TeamsModule } from './teams/teams.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
 
 configDotenv();
 
@@ -18,7 +20,21 @@ if (!process.env.MONGO_CON_STR) {
 
 @Module({
   controllers: [AppController],
-  providers: [AppService],
-  imports: [DomainsModule, MongooseModule.forRoot(process.env.MONGO_CON_STR), UsersModule, BlogsModule, EventsModule, TeamsModule, AuthModule],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
+  imports: [
+    DomainsModule,
+    MongooseModule.forRoot(process.env.MONGO_CON_STR),
+    UsersModule,
+    BlogsModule,
+    EventsModule,
+    TeamsModule,
+    AuthModule,
+  ],
 })
 export class AppModule {}
