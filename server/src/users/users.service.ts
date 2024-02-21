@@ -18,7 +18,7 @@ export class UsersService {
   }
 
   async findAll() {
-    return `This action returns all users`;
+    return await this.model.find().exec();
   }
 
   async findOneByUsername(username: string): Promise<User | undefined> {
@@ -31,10 +31,12 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     console.log(updateUserDto);
-    return `This action updates a #${id} user`;
+    return await this.model.findByIdAndUpdate(id, UpdateUserDto, {
+      upsert: true,
+    });
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} user`;
+    return await this.model.findByIdAndDelete(id);
   }
 }

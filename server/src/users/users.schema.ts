@@ -12,6 +12,16 @@ export class UserProfile {
   insta: string;
 }
 
+export enum PermissionRoles {
+  lead,
+  colead,
+  advisor,
+  domain_lead,
+  core_member,
+  contributor,
+  participant,
+}
+
 @Schema()
 export class User {
   @Prop({ required: true, index: true, unique: true })
@@ -23,7 +33,11 @@ export class User {
   @Prop({ required: true })
   hashedPassword: string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    enum: PermissionRoles,
+    default: PermissionRoles.participant,
+  })
   role: string;
 
   @Prop({ default: false })
