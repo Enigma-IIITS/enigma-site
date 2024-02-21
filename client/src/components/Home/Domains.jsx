@@ -76,7 +76,7 @@ const Domains = () => {
         >
             <h1 className="text-3xl my-5">Domains</h1>
             <Separator className="my-5 bg-white/60" />
-            <div className="flex flex-wrap justify-around py-12 px-5 items-center max-w-[90%] min-h-[350px] ">
+            <div className="flex flex-wrap justify-around py-12 px-5 items-center max-w-[90%] m-auto min-h-[350px] ">
                 {domains.map((domain, index) => (
                     <div
                         key={index}
@@ -84,7 +84,7 @@ const Domains = () => {
                     >
                         <div
                             ref={(ref) => (back.current[index] = ref)}
-                            className={`w-[300px] mx-[100px] sm:w-[400px] flex flex-col items-center h-[100px] overflow-hidden hover:h-[350px] absolute top-0 hover:top-[-175px] hover:z-30  rounded ${domain.style}`}
+                            className={`w-[300px]  sm:w-[400px] flex flex-col items-center h-[100px] overflow-hidden hover:h-[350px] absolute top-0 hover:top-[-175px] hover:z-30  rounded ${domain.style}`}
                         >
                             <div className="py-7 rounded md:w-fit mt-0 px-5 text-xl backdrop-blur-sm bg-black/30">
                                 <h2 className=" h-12 w-44 mb-5  m-auto">

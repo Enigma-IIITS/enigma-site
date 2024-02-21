@@ -7,54 +7,41 @@ import {
 import gsap from 'gsap'
 import { useLayoutEffect, useRef } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import PersonCard from '../PersonCard'
 gsap.registerPlugin(ScrollTrigger)
 
 const people = [
     {
         name: 'Leslie Alexander',
-        role: 'Lead',
+        role: 'Domain core',
         imageUrl: 'https://github.com/shadcn.png',
         description: 'Student at IIITS',
         profileLink: '#',
     },
     {
         name: 'Leslie Alexander',
-        role: 'Co-Lead',
+        role: 'Domain core',
         imageUrl: 'https://github.com/shadcn.png',
         description: 'Student at IIITS',
         profileLink: '#',
     },
     {
         name: 'Leslie Alexander',
-        role: 'Domain lead',
+        role: 'Domain core',
         imageUrl: 'https://github.com/shadcn.png',
         description: 'Student at IIITS',
         profileLink: '#',
     },
     {
         name: 'Leslie Alexander',
-        role: 'Domain lead',
-        imageUrl: 'https://github.com/shadcn.png',
-        description: 'Student at IIITS',
-        profileLink: '#',
-    },
-    {
-        name: 'Leslie Alexander',
-        role: 'Domain lead',
-        imageUrl: 'https://github.com/shadcn.png',
-        description: 'Student at IIITS',
-        profileLink: '#',
-    },
-    {
-        name: 'Leslie Alexander',
-        role: 'Domain lead',
+        role: 'Domain core',
         imageUrl: 'https://github.com/shadcn.png',
         description: 'Student at IIITS',
         profileLink: '#',
     },
 ]
 
-export default function Leads() {
+export default function DomainTeam({ left, DomainName }) {
     const container = useRef(null)
     const text = useRef(null)
 
@@ -78,8 +65,14 @@ export default function Leads() {
     }, [])
 
     return (
-        <div className="my-10 bg-zinc-950 py-24 sm:py-32" ref={container}>
-            <div className="mx-auto md:grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3 flex flex-col-reverse">
+        <div className="my-10 bg-zinc-950 py-20" ref={container}>
+            <h1 className="text-2xl font-bold text-center capitalize mb-20 tracking-tight text-cyan-500 sm:text-5xl ">
+                {DomainName}
+            </h1>
+
+            <div
+                className={`mx-auto  max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  flex flex-col-reverse   ${left ? 'md:flex-row-reverse' : 'md:flex-row'} justify-around`}
+            >
                 <ul
                     role="list"
                     className=" grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2 "
@@ -87,7 +80,7 @@ export default function Leads() {
                     {people.map((person) => (
                         <li key={person.name}>
                             <div
-                                className={`flex items-center gap-x-6 m-auto w-fit ${person.role === 'Lead' || person.role === 'Co-Lead' ? ' rounded pb-4 pr-2 border-e-2 border-b-2 border-gray-500' : ' '}`}
+                                className={`flex items-center gap-x-6 m-auto w-fit `}
                             >
                                 <Image
                                     className="h-16 w-16 rounded-full"
@@ -128,14 +121,11 @@ export default function Leads() {
                     ref={text}
                 >
                     <div className=" text-center xl:text-left">
-                        <h2 className="text-3xl font-bold tracking-tight text-cyan-500 sm:text-4xl">
-                            Meet our leadership
-                        </h2>
-                        <p className="mt-6 text-lg leading-8 text-gray-300">
-                            Libero fames augue nisl porttitor nisi, quis. Id ac
-                            elit odio vitae elementum enim vitae ullamcorper
-                            suspendisse.
-                        </p>
+                        <PersonCard
+                            imgSrc={'https://github.com/shadcn.png'}
+                            name={'Person'}
+                            role={'Domain lead'}
+                        />
                     </div>
                 </div>
             </div>

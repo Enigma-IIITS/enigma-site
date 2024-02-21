@@ -103,7 +103,7 @@ const Navbar = () => {
                                     <li>
                                         <a
                                             className="text-gray-300 hover:text-gray-400/75 transition "
-                                            href="/team"
+                                            href="/team/2024"
                                         >
                                             Team
                                         </a>
@@ -123,11 +123,14 @@ const Navbar = () => {
                                 className={`flex items-center gap-4 w-fit ${isOpen ? 'absolute top-10 right-7 ' : ' '} md:hidden`}
                             >
                                 <div className="block ">
-                                    <Button onClick={handleNavOpen}>
+                                    <button
+                                        onClick={handleNavOpen}
+                                        className=" bg-transparent text-white"
+                                    >
                                         <span className="material-symbols-outlined">
                                             {isOpen ? 'close' : 'menu'}
                                         </span>
-                                    </Button>
+                                    </button>
                                 </div>
                             </div>
                         </div>

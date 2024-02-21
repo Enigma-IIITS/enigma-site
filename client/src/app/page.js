@@ -6,10 +6,8 @@ import { Separator } from '@/components/ui/separator'
 import gsap from 'gsap'
 import { useLayoutEffect, useRef } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Leads from '@/components/Home/Leads'
 import MyTimeline from '@/components/Home/MyTimeline'
 import Domains from '@/components/Home/Domains'
-import Mentor from '@/components/Home/Mentor'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
@@ -113,8 +111,6 @@ export default function Home() {
             </section>
             <MyTimeline />
             <Domains />
-            <Mentor />
-            <Leads />
         </main>
     )
 }
