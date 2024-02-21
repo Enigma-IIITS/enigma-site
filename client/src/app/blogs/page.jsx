@@ -1,6 +1,12 @@
-import { useRouter } from 'next/navigation'
+import CommingSoon from '@/components/CommingSoon'
+import React from 'react'
 
-export default function Page() {
-    const router = useRouter()
-    return <p>Post: {router.query.eventName}</p>
+const page = () => {
+    return (
+        <div>
+            <CommingSoon />
+        </div>
+    )
 }
+
+export default page
