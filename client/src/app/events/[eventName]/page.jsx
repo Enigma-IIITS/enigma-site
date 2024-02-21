@@ -5,6 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MyGallery from "@/components/events/MyGallary";
+import SmallPerson from "@/components/SmallPerson";
 
 library.add(fab);
 
@@ -12,10 +13,10 @@ library.add(fab);
 const event = {
     title: "Example Event",
     summary: "This is a dummy event.",
-    coverImage: "https://github.com/shadcn.png",
+    coverImage: "https://picsum.photos/id/200/1080/300/",
     startDateTime: "2024-02-21T00:00:00Z",
     endDateTime: "2024-02-21T01:00:00Z",
-    venue: "Example Venue",
+    venue: "IIIT Sri City",
     sponsors: [
         {
             name: "Example Sponsor 1",
@@ -53,134 +54,104 @@ event.gallery.forEach(url => {
 });
 const Page = () => {
     return (
-        <div className="bg-gray-900 text-white px-4 py-8 w-[95%] m-auto my-10">
+        <div className=" text-white px-4  w-[95%] m-auto mb-10">
             <div className="flex flex-col gap-4 items-center">
-                <h1 className="text-3xl font-bold text-blue-500">{event.title}</h1>
-                <p className="text-gray-400">{event.summary}</p>
 
                 <div className="flex flex-col items-center gap-4 w-full justify-between">
                     {event.coverImage && (
-                        <Image
-                            src={event.coverImage}
-                            alt={event.title}
-                            width={200}
-                            height={200}
-                            className=" object-cover rounded-lg shadow-md shadow-blue-500/40"
-                        />
+                        <img src={event.coverImage} alt="" className=" object-cover rounded-lg shadow-md shadow-blue-500/40" />
+
                     )}
-                    <div className=" text-center">
-                        <p className="text-gray-200">Date & Time:</p>
-                        <p>
-                            {new Date(event.startDateTime).toLocaleString()} -{" "}
-                            {new Date(event.endDateTime).toLocaleString()}
-                        </p>
-                        <p className="text-gray-200">Venue:</p>
-                        <p>{event.venue}</p>
+                    <h1 className="text-3xl font-bold text-blue-500">{event.title}</h1>
+                    <p className="text-gray-400">{event.summary}</p>
+                    <div className=" text-center py-5 my-5 border-y-2 border-white">
+                        <div className="flex gap-5 items-center mb-4">
+
+                            <p className="text-gray-200"><span className="material-symbols-outlined  text-5xl">
+                                date_range
+                            </span></p>
+                            <p>
+                                {formatDateTime(event.startDateTime)}
+                                <p>To</p>
+                                {formatDateTime(event.endDateTime)}
+                            </p>
+                        </div>
+                        <p className="text-gray-200 flex items-center justify-center gap-3"><span className="material-symbols-outlined">location_on</span> {event.venue}</p>
                     </div>
                 </div>
-
-                {event.sponsors.length > 0 && (
-                    <div className="flex flex-wrap gap-4 mt-4 items-center">
-                        <p className="text-gray-200">Sponsors:</p>
-                        {event.sponsors.map((sponsor) => (
-                            <a
-                                key={sponsor.name}
-                                href={sponsor.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 hover:text-blue-500"
-                            >
-                                <img
-                                    src={sponsor.logo}
-                                    alt={sponsor.name}
-                                    className="w-8 h-8 rounded-full"
-                                />
-                                <span>{sponsor.name}</span>
-                            </a>
-                        ))}
-                    </div>
-                )}
-
-                {event.socialMediaPosts.length > 0 && (
-                    <div className="flex flex-wrap gap-4 mt-4">
-                        <p className="text-gray-200">Follow us on:</p>
-                        {event.socialMediaPosts.map((post) => (
-                            <a
-                                key={post}
-                                href={post}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-500 hover:text-blue-700"
-                            >
-                                {post.includes("facebook") && (
-                                    <FontAwesomeIcon icon={['fab', 'facebook-f']} size="lg" />
-                                )}
-                                {post.includes("twitter") && (
-                                    <FontAwesomeIcon icon={['fab', 'twitter']} size="lg" />
-                                )}
-                            </a>
-                        ))}
-
-
-                    </div>
-                )}
-
-                <div className="html-content" dangerouslySetInnerHTML={{ __html: event.description }} />
-
                 {event.acceptingRegistrations && (
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Register Now
                     </button>
                 )}
+                <div className="html-content" dangerouslySetInnerHTML={{ __html: event.description }} />
+
+                {event.sponsors.length > 0 && (
+                    <div className="flex flex-col gap-4 mt-4 items-center">
+                        <p className="text-gray-200">Sponsors</p>
+                        <div className="flex flex-wrap gap-4 mt-4 items-center">
+                            {event.sponsors.map((sponsor) => (
+                                <a
+                                    key={sponsor.name}
+                                    href={sponsor.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 hover:text-blue-500"
+                                >
+                                    <Image
+                                        src={sponsor.logo}
+                                        alt={sponsor.name}
+                                        width={200}
+                                        height={200}
+                                        className=" max-h-[100px] max-w-200px rounded"
+                                    />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+
+
 
                 <MyGallery images={gallery} />
 
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="flex flex-col gap-2 mt-4 items-center">
                     {event.eventManagers.length > 0 && (
-                        <p className="text-gray-200">Event Managers:</p>
+                        <p className="text-gray-200 mb-2 pb-2 border-b-2 text-xl ">Event Managers</p>
                     )}
-                    {event.eventManagers.map((manager) => (
-                        <a href={`/people/${manager}`} key={manager} className="text-blue-500 hover:underline">
-                            {manager}
-                        </a>
-                    ))}
+                    <div className="flex flex-wrap gap-2 ">
+                        {event.eventManagers.map((manager) => (
+                            <SmallPerson key={manager} name={manager} />
+                        ))}
+                    </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mt-4">
-
-
+                <div className="flex flex-col gap-2 mt-4 items-center">
                     {event.organizers.length > 0 && (
-                        <p className="text-gray-200">Organizers:</p>
+                        <p className="text-gray-200 mb-2 pb-2 border-b-2 text-xl ">Organizers</p>
                     )}
-                    {event.organizers.map((organizer) => (
-                        <a href={`/people/${organizer}`} key={organizer} className="text-blue-500 hover:underline">
-                            {organizer}
-                        </a>
-                    ))}
+                    <div className="flex flex-wrap gap-2 ">
+                        {event.organizers.map((organizer) => (
+                            <SmallPerson key={organizer} name={organizer} />
+                        ))}
+                    </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mt-4">
-
-                    {event.volunteers.length > 0 && (
-                        <div className="mt-4">
-                            <p className="text-gray-200">Volunteers:</p>
-                            <ul className="list-disc pl-6 text-gray-300">
-                                {event.volunteers.map((volunteer) => (
-                                    <li key={volunteer}>
-                                        <a href={`/people/${volunteer}`} className="text-blue-500 hover:underline" >{volunteer}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                <div className="flex flex-col gap-2 mt-4 items-center">
+                    {event.organizers.length > 0 && (
+                        <p className="text-gray-200 mb-2 pb-2 border-b-2 text-xl ">Volunteers</p>
                     )}
-
+                    <div className="flex flex-wrap gap-2 ">
+                        {event.volunteers.map((volunteer) => (
+                            <SmallPerson key={volunteer} name={volunteer} />
+                        ))}
+                    </div>
                 </div>
 
-                <div className="mt-8">
-                    <p className="text-gray-200 text-sm">
-                        This event was created by user1. Last updated on February 21, 2024.
-                    </p>
-                </div>
+
+
+
             </div>
         </div>
     );
@@ -188,3 +159,36 @@ const Page = () => {
 
 export default Page;
 
+function formatDateTime(dateTimeString) {
+    const months = [
+        "January", "February", "March", "April", "May", "June", "July",
+        "August", "September", "October", "November", "December"
+    ];
+
+    const date = new Date(dateTimeString);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const period = hours >= 12 ? 'pm' : 'am';
+
+    // Convert hours from 24-hour format to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Handle midnight (0 hours)
+
+    const formattedDate = day + getOrdinalSuffix(day) + ' ' + month + ' ' + year + ' ' + hours + ':' + (minutes < 10 ? '0' : '') + minutes + period;
+    return formattedDate;
+}
+
+function getOrdinalSuffix(day) {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
