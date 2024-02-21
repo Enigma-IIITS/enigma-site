@@ -103,7 +103,7 @@ const Navbar = () => {
                                     <li>
                                         <a
                                             className="text-gray-300 hover:text-gray-400/75 transition "
-                                            href="/team"
+                                            href="/team/2024"
                                         >
                                             Team
                                         </a>

@@ -33,6 +33,7 @@ export default function Page({ params }) {
             <DomainTeam left={true} DomainName={'Computer Graphics'} />
             <DomainTeam left={false} DomainName={'System Software'} />
             <DomainTeam left={true} DomainName={'Distributed Systems'} />
+            <DomainTeam left={false} DomainName={'Public Relations'} />
         </section>
     )
 }
