@@ -11,7 +11,6 @@ import PersonCard from '../PersonCard'
 gsap.registerPlugin(ScrollTrigger)
 
 const people = [
-
     {
         name: 'Leslie Alexander',
         role: 'Domain core',
@@ -67,10 +66,13 @@ export default function DomainTeam({ left, DomainName }) {
 
     return (
         <div className="my-10 bg-zinc-950 py-20" ref={container}>
+            <h1 className="text-2xl font-bold text-center capitalize mb-20 tracking-tight text-cyan-500 sm:text-5xl ">
+                {DomainName}
+            </h1>
 
-            <h1 className="text-2xl font-bold text-center capitalize mb-20 tracking-tight text-cyan-500 sm:text-5xl ">{DomainName}</h1>
-
-            <div className={`mx-auto  max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  flex flex-col-reverse   ${left ? "md:flex-row-reverse" : "md:flex-row"} justify-around`}>
+            <div
+                className={`mx-auto  max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8  flex flex-col-reverse   ${left ? 'md:flex-row-reverse' : 'md:flex-row'} justify-around`}
+            >
                 <ul
                     role="list"
                     className=" grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2 "
@@ -119,8 +121,11 @@ export default function DomainTeam({ left, DomainName }) {
                     ref={text}
                 >
                     <div className=" text-center xl:text-left">
-                        <PersonCard imgSrc={'https://github.com/shadcn.png'} name={'Person'} role={'Domain lead'} />
-
+                        <PersonCard
+                            imgSrc={'https://github.com/shadcn.png'}
+                            name={'Person'}
+                            role={'Domain lead'}
+                        />
                     </div>
                 </div>
             </div>

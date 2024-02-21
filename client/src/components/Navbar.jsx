@@ -123,7 +123,10 @@ const Navbar = () => {
                                 className={`flex items-center gap-4 w-fit ${isOpen ? 'absolute top-10 right-7 ' : ' '} md:hidden`}
                             >
                                 <div className="block ">
-                                    <button onClick={handleNavOpen} className=" bg-transparent text-white" >
+                                    <button
+                                        onClick={handleNavOpen}
+                                        className=" bg-transparent text-white"
+                                    >
                                         <span className="material-symbols-outlined">
                                             {isOpen ? 'close' : 'menu'}
                                         </span>
