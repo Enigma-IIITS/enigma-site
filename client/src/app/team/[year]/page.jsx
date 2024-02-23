@@ -16,7 +16,7 @@ export default function Page({ params }) {
                     adipisci rem similique, at omnis eligendi optio eos harum.
                 </p>
 
-                <div className=" flex justify-around items-center flex-wrap mt-10">
+                <div className=" flex justify-around items-center gap-5 flex-wrap mt-10">
                     <PersonCard
                         imgSrc={'https://github.com/shadcn.png'}
                         name={'Person'}
