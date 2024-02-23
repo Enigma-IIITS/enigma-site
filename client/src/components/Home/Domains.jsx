@@ -84,7 +84,7 @@ const Domains = () => {
                     >
                         <div
                             ref={(ref) => (back.current[index] = ref)}
-                            className={`w-[300px]  sm:w-[400px] flex flex-col items-center h-[100px] overflow-hidden hover:h-[350px] absolute top-0 hover:top-[-175px] hover:z-30  rounded ${domain.style}`}
+                            className={`w-[300px]  sm:w-[400px] flex flex-col items-center h-[100px] overflow-hidden hover:h-[430px] hover:top-[-215px] sm:hover:h-[350px] sm:hover:top-[-175px] absolute top-0 hover:z-30  rounded ${domain.style}`}
                         >
                             <div className="py-7 rounded md:w-fit mt-0 px-5 text-xl backdrop-blur-sm bg-black/30">
                                 <h2 className=" h-12 w-44 mb-5  m-auto">
