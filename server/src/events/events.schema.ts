@@ -1,5 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { CoverImage } from 'src/entities/cover-image.entity';
 
 @Schema()
 export class Sponsor {
@@ -20,7 +21,7 @@ export class Event {
   summary: string;
 
   @Prop()
-  coverImage: string;
+  coverImage: CoverImage;
 
   @Prop()
   startDateTime: Date;
