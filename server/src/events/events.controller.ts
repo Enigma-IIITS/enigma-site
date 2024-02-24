@@ -13,7 +13,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EventResponseDto } from './dto/event-response.dto';
 import FindAllEventsDto from './dto/find-all-events.dto';
-import { Public } from 'src/auth/public';
+import { Public } from 'src/auth/public.decorator';
 
 @ApiBearerAuth()
 @ApiTags('events')

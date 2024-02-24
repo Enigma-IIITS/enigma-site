@@ -11,7 +11,7 @@ import { ClubDomainsService } from './domains.service';
 import { CreateClubDomainDto } from './dto/create-domain.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ClubDomainResponse } from './dto/domain-response.dto';
-import { Public } from 'src/auth/public';
+import { Public } from 'src/auth/public.decorator';
 
 @ApiBearerAuth()
 @ApiTags('domains')
