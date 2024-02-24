@@ -1,25 +1,18 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { UserProfile as UserProfileEntity } from './entities/user-profile.entity';
 
 @Schema()
-export class UserProfile {
-  fullName: string;
-  profilePic: string;
-  bio: string;
-  github: string;
-  twitter: string;
-  linkedin: string;
-  insta: string;
-}
+export class UserProfile extends UserProfileEntity {}
 
 export enum PermissionRoles {
-  lead,
-  colead,
-  advisor,
-  domain_lead,
-  core_member,
-  contributor,
-  participant,
+  lead = 'lead',
+  colead = 'colead',
+  advisor = 'advisor',
+  domain_lead = 'domain_lead',
+  core_member = 'core_member',
+  contributor = 'contributor',
+  participant = 'participant',
 }
 
 @Schema()

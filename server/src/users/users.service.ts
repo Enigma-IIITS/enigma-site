@@ -4,6 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { UserPermsOutDto } from './dto/user-perms-out.dto';
+import { UserOutDto } from './dto/user-out.dto';
 
 @Injectable()
 export class UsersService {
@@ -29,11 +31,21 @@ export class UsersService {
     return await this.model.findOne({ email: email });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    console.log(updateUserDto);
-    return await this.model.findByIdAndUpdate(id, UpdateUserDto, {
+  async findUserPermissions(
+    username: string,
+  ): Promise<UserPermsOutDto | undefined> {
+    return await this.model
+      .findOne({ username: username })
+      .select('role isSuperUser isStaff');
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.model.findByIdAndUpdate(id, updateUserDto, {
       upsert: true,
+      projection: 'profile',
     });
+    // TODO: project so that only needed things come
+    // dto based easy writing of projections figure out
   }
 
   async remove(id: string) {
