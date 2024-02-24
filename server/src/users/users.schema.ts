@@ -5,7 +5,7 @@ import { UserProfile as UserProfileEntity } from './entities/user-profile.entity
 @Schema()
 export class UserProfile extends UserProfileEntity {}
 
-export enum PermissionRoles {
+export enum URoles {
   lead = 'lead',
   colead = 'colead',
   advisor = 'advisor',
@@ -28,8 +28,8 @@ export class User {
 
   @Prop({
     required: true,
-    enum: PermissionRoles,
-    default: PermissionRoles.participant,
+    enum: URoles,
+    default: URoles.participant,
   })
   role: string;
 

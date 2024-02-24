@@ -14,6 +14,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { EventResponseDto } from './dto/event-response.dto';
 import FindAllEventsDto from './dto/find-all-events.dto';
 import { Public } from 'src/auth/public.decorator';
+import { Roles } from 'src/auth/roles.decorator';
+import { URoles } from 'src/users/users.schema';
 
 @ApiBearerAuth()
 @ApiTags('events')
@@ -34,11 +36,13 @@ export class EventsController {
   }
 
   @Post()
+  @Roles(URoles.lead, URoles.advisor, URoles.domain_lead)
   async create(@Body() createEventDto: CreateEventDto) {
     return await this.eventsService.create(createEventDto);
   }
 
   @Patch(':id')
+  @Roles(URoles.lead, URoles.advisor, URoles.domain_lead)
   async update(
     @Param('id') id: string,
     @Body() updateEventDto: UpdateEventDto,
@@ -47,6 +51,7 @@ export class EventsController {
   }
 
   @Delete(':id')
+  @Roles(URoles.lead, URoles.advisor, URoles.domain_lead)
   remove(@Param('id') id: string): Promise<EventResponseDto> {
     return this.eventsService.remove(id);
   }

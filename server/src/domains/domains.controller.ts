@@ -12,6 +12,8 @@ import { CreateClubDomainDto } from './dto/create-domain.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ClubDomainResponse } from './dto/domain-response.dto';
 import { Public } from 'src/auth/public.decorator';
+import { Roles } from 'src/auth/roles.decorator';
+import { URoles } from 'src/users/users.schema';
 
 @ApiBearerAuth()
 @ApiTags('domains')
@@ -34,6 +36,7 @@ export class DomainsController {
   }
 
   @Post()
+  @Roles(URoles.lead, URoles.advisor)
   @ApiOperation({ summary: 'Create a new domain' })
   async create(
     @Body() createDomainDto: CreateClubDomainDto,
@@ -42,6 +45,7 @@ export class DomainsController {
   }
 
   @Patch(':id')
+  @Roles(URoles.lead, URoles.advisor)
   @ApiOperation({ summary: 'Update details of an existing domain' })
   async update(
     @Param('id') id: string,
@@ -49,7 +53,9 @@ export class DomainsController {
   ): Promise<ClubDomainResponse> {
     return await this.service.update(id, updateDomainDto);
   }
+
   @Delete(':id')
+  @Roles(URoles.lead, URoles.advisor)
   @ApiOperation({ summary: 'Delete a particular domain by its id' })
   async remove(@Param('id') id: string): Promise<ClubDomainResponse> {
     return await this.service.remove(id);
