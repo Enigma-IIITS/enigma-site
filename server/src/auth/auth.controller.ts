@@ -12,16 +12,21 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SingInDto } from './dto/sign-in.dto';
 import { RegisterDto } from './dto/register.dto';
 import { RegisterResponseDto } from './dto/register-response.dto';
+import { Public } from './public.decorator';
+import { UserPermsOutDto } from 'src/users/dto/user-perms-out.dto';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private service: AuthService) {}
 
+  @Public()
   @Post('login')
   signIn(@Body() signInDto: SingInDto) {
     return this.service.signIn(signInDto.username, signInDto.password);
   }
+
+  @Public()
   @Post('register')
   async register(
     @Body() registerDto: RegisterDto,
@@ -31,8 +36,8 @@ export class AuthController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  @Get('permissions')
+  async getPermissions(@Request() req): Promise<UserPermsOutDto> {
+    return req.permissions;
   }
 }
