@@ -1,3 +1,5 @@
+import { CoverImage } from 'src/entities/cover-image.entity';
+
 export class SponsorDto {
   sponsorName: string;
   logo?: string;
@@ -11,7 +13,7 @@ export class CreateEventDto {
 
   summary?: string;
 
-  coverImage?: string;
+  coverImage?: CoverImage;
 
   startDateTime?: Date;
 
