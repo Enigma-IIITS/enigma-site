@@ -16,7 +16,11 @@ export class AuthService {
   ) {}
 
   async signIn(username: string, password: string): Promise<SignInResponseDto> {
+    // TODO: support both username and email
     const user = await this.usersService.findOneByUsername(username);
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
     const match = await bcrypt.compare(password, user?.hashedPassword);
 
     if (!match) {
