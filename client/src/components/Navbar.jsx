@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const pathname = usePathname()
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const [solidNav, SetsolidNav] = useState(false)
 
@@ -41,13 +42,24 @@ const Navbar = () => {
             SetsolidNav(true)
         }
 
-        console.log(pathname)
+        try {
+
+            const localStorage = window.localStorage;
+            if (localStorage.getItem('authToken')) {
+                setLoggedIn(true);
+            } else {
+                setLoggedIn(false)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }, [pathname])
+
 
     return (
         <>
             <header
-                className={`fixed z-10 text-xl transition duration-500 w-screen py-4 top-0 left-0 flex justify-center items-center ${solidNav ? 'backdrop-blur-sm bg-zinc-950/50' : ' bg-transparent'}   ${isOpen ? 'h-fit py-10' : 'h-16'}`}
+                className={`fixed z-10 text-xl transition duration-500 w-screen py-4 top-0 left-0 flex justify-center items-center pr-5 ${solidNav ? 'backdrop-blur-sm bg-zinc-950/50' : ' bg-transparent'}   ${isOpen ? 'h-fit py-10' : 'h-16'}`}
             >
                 <nav className="mx-auto w-full px-4 sm:px-6 lg:px-8">
                     <div
@@ -78,7 +90,7 @@ const Navbar = () => {
                                 >
                                     <li>
                                         <a
-                                            className="text-gray-300 hover:text-gray-400/75 transition "
+                                            className="text-gray-300 hover:text-gray-300/75 transition "
                                             href="/#about"
                                         >
                                             About
@@ -86,15 +98,7 @@ const Navbar = () => {
                                     </li>
                                     <li>
                                         <a
-                                            className="text-gray-300 hover:text-gray-400/75 transition "
-                                            href="/domain"
-                                        >
-                                            Domain
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            className="text-gray-300 hover:text-gray-400/75 transition "
+                                            className="text-gray-300 hover:text-gray-300/75 transition "
                                             href="/events"
                                         >
                                             Events
@@ -102,7 +106,7 @@ const Navbar = () => {
                                     </li>
                                     <li>
                                         <a
-                                            className="text-gray-300 hover:text-gray-400/75 transition "
+                                            className="text-gray-300 hover:text-gray-300/75 transition "
                                             href="/team/2024"
                                         >
                                             Team
@@ -110,12 +114,31 @@ const Navbar = () => {
                                     </li>
                                     <li>
                                         <a
-                                            className="text-gray-300 hover:text-gray-400/75 transition "
+                                            className="text-gray-300 hover:text-gray-300/75 transition "
                                             href="/blogs"
                                         >
                                             Blog
                                         </a>
                                     </li>
+                                    {(loggedIn) && (
+                                        <li>
+                                            <a
+                                                className="text-gray-300 hover:text-gray-300/75 transition "
+                                                href="/settings"
+                                            >
+                                                Settings
+                                            </a>
+                                        </li>
+                                    )}
+                                    {(!(loggedIn)) && (
+                                        <li>
+                                            <a href="/login">
+                                                <Button>
+                                                    Login
+                                                </Button>
+                                            </a>
+                                        </li>
+                                    )}
                                 </ul>
                             </nav>
 

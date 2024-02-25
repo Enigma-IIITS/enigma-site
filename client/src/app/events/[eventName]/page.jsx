@@ -10,39 +10,46 @@ import SmallPerson from '@/components/SmallPerson'
 library.add(fab)
 
 const event = {
-    title: 'Example Event',
-    summary: 'This is a dummy event.',
-    coverImage: 'https://picsum.photos/id/200/1080/300/',
-    startDateTime: '2024-02-21T00:00:00Z',
-    endDateTime: '2024-02-21T01:00:00Z',
-    venue: 'IIIT Sri City',
-    sponsors: [
+    "title": "Example Event",
+    "slug": "example-event",
+    "summary": "This is a dummy event.",
+    "coverImage": {
+        "sm": "https://picsum.photos/id/200/350/400/",
+        "md": "https://picsum.photos/id/200/800/400/",
+        "lg": "https://picsum.photos/id/200/1080/300/",
+        "thumb": "https://picsum.photos/id/200/1080/300/"
+    },
+    "startDateTime": "2024-02-21T00:00:00Z",
+    "endDateTime": "2024-02-21T01:00:00Z",
+    "venue": "IIIT Sri City",
+    "eventType": "string",
+    "sponsors": [
         {
-            name: 'Example Sponsor 1',
-            logo: 'https://github.com/shadcn.png',
-            url: 'https://www.example.com/sponsor1',
+            "sponsorName": "Example Sponsor 1",
+            "logo": "https://github.com/shadcn.png",
+            "url": "https://www.example.com/sponsor1"
         },
         {
-            name: 'Example Sponsor 2',
-            logo: 'https://github.com/shadcn.png',
-            url: 'https://www.example.com/sponsor2',
-        },
+            "sponsorName": "Example Sponsor 2",
+            "logo": "https://github.com/shadcn.png",
+            "url": "https://www.example.com/sponsor2"
+        }
     ],
-    socialMediaPosts: [
-        'https://www.facebook.com/exampleevent',
-        'https://www.twitter.com/exampleevent',
+    "socialMediaPosts": [
+        "https://www.facebook.com/exampleevent",
+        "https://www.twitter.com/exampleevent"
     ],
-    description: '<p>This is a description of the event.</p>',
-    acceptingRegistrations: true,
-    completed: false,
-    eventManagers: ['user1', 'user2'],
-    organizers: ['user3'],
-    volunteers: ['user4', 'user5'],
-    gallery: [
-        'https://picsum.photos/id/1018/1000/600/',
-        'https://picsum.photos/id/1015/1000/600/',
-        'https://picsum.photos/id/1019/1000/600/',
-    ],
+    "description": "<p>This is a description of the event.</p>",
+    "acceptRegistrations": true,
+    "completed": false,
+    "managers": ["user1", "user2"],
+    "organizers": ["user3"],
+    "volunteers": ["user4", "user5"],
+    "gallery": [
+        "https://picsum.photos/id/1018/1000/600/",
+        "https://picsum.photos/id/1015/1000/600/",
+        "https://picsum.photos/id/1019/1000/600/"
+    ]
 }
 
 const gallery = []
@@ -57,42 +64,60 @@ event.gallery.forEach((url) => {
 })
 const Page = () => {
     return (
-        <div className=" text-white px-4  w-[95%] m-auto mb-10">
+        <div className="text-white px-4 w-[95%] m-auto mb-10">
             <div className="flex flex-col gap-4 items-center">
                 <div className="flex flex-col items-center gap-4 w-full justify-between">
                     {event.coverImage && (
-                        <img
-                            src={event.coverImage}
-                            alt=""
-                            className=" object-cover rounded-lg shadow-md shadow-blue-500/40"
-                        />
+                        <>
+                            {event.coverImage.sm && (
+                                <img
+                                    src={event.coverImage.sm}
+                                    alt=""
+                                    className="object-cover rounded-lg shadow-md shadow-blue-500/40 sm:hidden "
+                                />
+                            )}
+                            {event.coverImage.md && (
+                                <img
+                                    src={event.coverImage.md}
+                                    alt=""
+                                    className={`object-cover rounded-lg shadow-md shadow-blue-500/40 ${event.coverImage.sm ? "hidden" : ""} sm:block ${event.coverImage.lg ? "md:hidden" : ""} `}
+                                />
+                            )}
+                            {event.coverImage.lg && (
+                                <img
+                                    src={event.coverImage.lg}
+                                    alt=""
+                                    className={`object-cover rounded-lg shadow-md shadow-blue-500/40 hidden md:block`}
+                                />
+                            )}
+                            <h1 className="text-3xl font-bold text-blue-500">
+                                {event.title}
+                            </h1>
+                            <p className="text-gray-400">{event.summary}</p>
+                            <div className="text-center py-5 my-5 border-y-2 border-white">
+                                <div className="flex gap-5 items-center mb-4">
+                                    <p className="text-gray-200">
+                                        <span className="material-symbols-outlined text-5xl">
+                                            date_range
+                                        </span>
+                                    </p>
+                                    <p>
+                                        {formatDateTime(event.startDateTime)}
+                                        <p>To</p>
+                                        {formatDateTime(event.endDateTime)}
+                                    </p>
+                                </div>
+                                <p className="text-gray-200 flex items-center justify-center gap-3">
+                                    <span className="material-symbols-outlined">
+                                        location_on
+                                    </span>{' '}
+                                    {event.venue}
+                                </p>
+                            </div>
+                        </>
                     )}
-                    <h1 className="text-3xl font-bold text-blue-500">
-                        {event.title}
-                    </h1>
-                    <p className="text-gray-400">{event.summary}</p>
-                    <div className=" text-center py-5 my-5 border-y-2 border-white">
-                        <div className="flex gap-5 items-center mb-4">
-                            <p className="text-gray-200">
-                                <span className="material-symbols-outlined  text-5xl">
-                                    date_range
-                                </span>
-                            </p>
-                            <p>
-                                {formatDateTime(event.startDateTime)}
-                                <p>To</p>
-                                {formatDateTime(event.endDateTime)}
-                            </p>
-                        </div>
-                        <p className="text-gray-200 flex items-center justify-center gap-3">
-                            <span className="material-symbols-outlined">
-                                location_on
-                            </span>{' '}
-                            {event.venue}
-                        </p>
-                    </div>
                 </div>
-                {event.acceptingRegistrations && (
+                {event.acceptRegistrations && (
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Register Now
                     </button>
@@ -108,18 +133,16 @@ const Page = () => {
                         <div className="flex flex-wrap gap-4 mt-4 items-center justify-around">
                             {event.sponsors.map((sponsor) => (
                                 <a
-                                    key={sponsor.name}
+                                    key={sponsor.sponsorName}
                                     href={sponsor.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 hover:text-blue-500"
                                 >
-                                    <Image
+                                    <img
                                         src={sponsor.logo}
-                                        alt={sponsor.name}
-                                        width={200}
-                                        height={200}
-                                        className=" max-h-[100px] max-w-200px rounded"
+                                        alt={sponsor.sponsorName}
+                                        className="max-h-[100px] max-w-200px rounded"
                                     />
                                 </a>
                             ))}
@@ -130,13 +153,13 @@ const Page = () => {
                 <MyGallery images={gallery} />
 
                 <div className="flex flex-col gap-2 mt-4 items-center">
-                    {event.eventManagers.length > 0 && (
+                    {event.managers.length > 0 && (
                         <p className="text-gray-200 mb-2 pb-2 border-b-2 text-xl ">
                             Event Managers
                         </p>
                     )}
                     <div className="flex flex-wrap gap-2 ">
-                        {event.eventManagers.map((manager) => (
+                        {event.managers.map((manager) => (
                             <SmallPerson key={manager} name={manager} />
                         ))}
                     </div>
@@ -156,7 +179,7 @@ const Page = () => {
                 </div>
 
                 <div className="flex flex-col gap-2 mt-4 items-center">
-                    {event.organizers.length > 0 && (
+                    {event.volunteers.length > 0 && (
                         <p className="text-gray-200 mb-2 pb-2 border-b-2 text-xl ">
                             Volunteers
                         </p>
