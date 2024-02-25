@@ -12,6 +12,9 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { RolesGuard } from './auth/roles.guard';
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { fileStorageRootDir } from './files/constants';
 
 configDotenv();
 
@@ -33,13 +36,18 @@ if (!process.env.MONGO_CON_STR) {
     },
   ],
   imports: [
-    DomainsModule,
     MongooseModule.forRoot(process.env.MONGO_CON_STR),
+    ServeStaticModule.forRoot({
+      rootPath: fileStorageRootDir,
+      serveRoot: '/files',
+    }),
+    AuthModule,
     UsersModule,
+    FilesModule,
+    DomainsModule,
     BlogsModule,
     EventsModule,
     TeamsModule,
-    AuthModule,
   ],
 })
 export class AppModule {}
