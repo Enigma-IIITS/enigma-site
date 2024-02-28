@@ -2,6 +2,6 @@ import { UserProfile as UserProfileEntity } from '../entities/user-profile.entit
 
 class UserProfile extends UserProfileEntity {}
 
-export class UpdateUserDto {
+export class UpdateUserProfileDto {
   profile: UserProfile;
 }

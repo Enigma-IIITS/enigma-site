@@ -6,15 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserProfileDto } from './dto/update-user-profile.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/auth/public.decorator';
-import { UserOutDto } from './dto/user-out.dto';
+import { UserProfileOutDto } from './dto/user-profile-out.dto';
 import { Roles } from 'src/auth/roles.decorator';
 import { URoles } from 'src/users/users.schema';
+
+
 
 @ApiBearerAuth()
 @ApiTags('users')
@@ -44,9 +47,9 @@ export class UsersController {
   @Roles(URoles.lead, URoles.colead)
   update(
     @Param('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
-  ): Promise<UserOutDto> {
-    return this.service.update(id, updateUserDto);
+    @Body() updateUserDto: UpdateUserProfileDto,
+  ): Promise<UserProfileOutDto> {
+    return this.service.updateProfile(id, updateUserDto);
   }
 
   @Delete(':id')
