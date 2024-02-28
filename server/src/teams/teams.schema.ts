@@ -13,8 +13,14 @@ export class DomainRoleD extends DomainRoleDEntity {}
 export class Teams {
   @Prop({ required: true, index: true, unique: true })
   academicYear: string;
+
+  @Prop()
   leads: MemberRoleD[];
+
+  @Prop()
   coleads: MemberRoleD[];
+
+  @Prop()
   domains: DomainRoleD[];
 }
 
