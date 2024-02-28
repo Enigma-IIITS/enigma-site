@@ -10,35 +10,58 @@ import {
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/public.decorator';
+import { Roles } from 'src/auth/roles.decorator';
+import { URoles } from 'src/users/users.schema';
+import { ApiOperation } from '@nestjs/swagger';
+import { TeamResponseDto } from './dto/team-out.dto';
 
+@ApiBearerAuth()
 @ApiTags('teams')
 @Controller('teams')
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
-  @Post()
-  create(@Body() createTeamDto: CreateTeamDto) {
-    return this.teamsService.create(createTeamDto);
-  }
-
+  @Public()
   @Get()
-  findAll() {
+  @ApiOperation({
+    summary: 'Get details of entire teams of all academic years',
+  })
+  findAll(): Promise<TeamResponseDto[]> {
     return this.teamsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.teamsService.findOne(+id);
+  @Public()
+  @Get(':academicYear')
+  @ApiOperation({ summary: 'Get details of a specific academic year' })
+  findOne(
+    @Param('academicYear') academicYear: string,
+  ): Promise<TeamResponseDto> {
+    return this.teamsService.findOne(academicYear);
+  }
+
+  @Post()
+  @Roles(URoles.advisor, URoles.lead)
+  @ApiOperation({ summary: 'Create new team entry for an academic year' })
+  create(@Body() createTeamDto: CreateTeamDto): Promise<TeamResponseDto> {
+    return this.teamsService.create(createTeamDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
-    return this.teamsService.update(+id, updateTeamDto);
+  @Roles(URoles.advisor, URoles.lead)
+  @ApiOperation({ summary: 'Modify existing team entry for an academic year' })
+  update(
+    @Param('id') id: string,
+    @Body() updateTeamDto: UpdateTeamDto,
+  ): Promise<TeamResponseDto> {
+    return this.teamsService.update(id, updateTeamDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.teamsService.remove(+id);
+  @Roles(URoles.advisor, URoles.lead)
+  @ApiOperation({ summary: 'Delete existing team entry for an academic year' })
+  remove(@Param('id') id: string): Promise<TeamResponseDto> {
+    return this.teamsService.remove(id);
   }
 }

@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { TeamDocument, Teams } from './teams.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class TeamsService {
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(
+    @InjectModel(Teams.name)
+    private model: Model<TeamDocument>,
+  ) {}
+
+  // while updating and creating
+  // TODO validate if all domains ids are valid
+  // TODO validate if all users ids are valid
+
+  async create(createTeamDto: CreateTeamDto): Promise<Teams> {
+    const createdTeam = new this.model(createTeamDto);
+    return await createdTeam.save();
   }
 
-  findAll() {
-    return `This action returns all teams`;
+  async findAll(): Promise<Teams[]> {
+    return await this.model.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findOne(academicYear: string): Promise<Teams> {
+    return await this.model.findOne({ academicYear: academicYear });
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async update(id: string, updateTeamDto: UpdateTeamDto): Promise<Teams> {
+    return await this.model.findByIdAndUpdate(id, updateTeamDto, {
+      upsert: true,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async remove(id: string): Promise<Teams> {
+    return await this.model.findByIdAndDelete(id);
   }
 }
