@@ -1,7 +1,9 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { MemberRoleD as MemberRoleDEntity } from './entities/team.entity';
-import { DomainRoleD as DomainRoleDEntity } from './entities/team.entity';
+import {
+  MemberRoleD as MemberRoleDEntity,
+  DomainRoleD as DomainRoleDEntity,
+} from './entities/team.entity';
 
 @Schema()
 export class MemberRoleD extends MemberRoleDEntity {}
