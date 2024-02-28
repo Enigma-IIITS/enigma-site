@@ -6,7 +6,7 @@ export class ClubDomain {
   @Prop({ required: true })
   domainName: string;
 
-  @Prop({ required: true, index: true })
+  @Prop({ required: true, index: true, unique: true })
   slug: string;
 
   @Prop()
